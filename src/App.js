@@ -10,7 +10,7 @@ function App() {
   const [previousPageUrl,setPreviousPageUrl]=useState();
   const [loading,setLoading]=useState(true);
 
-  useEffect(function () {
+  useEffect(() => {
     let cancel;
     setLoading(true);
     console.log("enter in axios");
@@ -21,8 +21,8 @@ function App() {
       setNextPageUrl(res.data.next);
       setPreviousPageUrl(res.data.previous);
       setPokemon(res.data.results.map(p => p.name));
+      return () => cancel();
     });
-    return () => cancel();
   },[currentPageUrl])
 
   function goToNextPage(){
